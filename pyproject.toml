@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "torchsphharm"
-version = "0.0.0"
+version = "0.0.1"
 description = "Python package for spherical harmonics (sph_harm) in torch"
 authors = ["34j <34j.95a2p@simplelogin.com>"]
 license = "MIT"
