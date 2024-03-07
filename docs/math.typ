@@ -87,7 +87,7 @@ $
 @BibEntry2021Nov
 #lemma()[
 $
-forall i in {1, ..., d-2},(laplacian_d)_theta_i / (sin^2 (theta_(d-1))) f = (laplacian_(d-1))_theta_i f
+forall i in {1, ..., d-2}, (sin^2 (theta_(d-1))) (laplacian_d)_theta_i f = (laplacian_(d-1))_theta_i f
 $
 ]
 
@@ -129,22 +129,22 @@ $
 sum_(i=1)^(d-2) (laplacian_d)_theta_i Z_d + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
 $
 $
-sin^2 (theta_(d-1)) sum_(i=1)^(d-2) (laplacian_(d-1))_theta_i Zd1 Wd + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
+1 / (sin^2 (theta_(d-1))) sum_(i=1)^(d-2) (laplacian_(d-1))_theta_i Zd1 Wd + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
 $
 $d=d-1$のときの式を代入して、
 $
-sin^2 (theta_(d-1)) l(l + d - 1) Zd1 Wd + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
+(l(l + d - 1) Zd1 Wd) / (sin^2 (theta_(d-1)))  + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
 $
 $
-sin^2 (theta_(d-1)) l(l + d - 1) Wd + (laplacian_d)_theta_(d-1) Wd - k(k + d - 2) Wd = 0
+l(l + d - 1) / (sin^2 (theta_(d-1))) + (laplacian_d)_theta_(d-1) - k(k + d - 2)) W = 0
 $
 $
-(diff_(theta_i)^2 Wd + (d-1) cot(theta_i) diff_(theta_i) Wd)/r^2 - cos^2 (theta_(d-1))  k(k + d - 2) Wd = 0
+(diff_(theta_(d-1))^2 + (d-2) cot(theta_(d-1)) diff_(theta_(d-1)) - l(l + d - 1) / (sin^2 (theta_(d-1))) + k(k + d - 2) ) W = 0
 $
 
-$t := cos (theta_(d-1))$とおけば、
+$t := cos (theta_(d-1))$とおけば、$diff_theta_(d-1) = - sin (theta_(d-1)) diff_t, diff^2_theta_(d-1) =( 1-t^2) diff_t^2 - t diff_t$。
 $
-(diff_(theta_i)^2 + (i-1)
+((1 - t^2) diff_t^2 - (d-1)t diff_t - l(l + d - 1) / (1 - t^2) + k(k + d - 2) ) W = 0
 $
 #bibliography("math.bib")
 
