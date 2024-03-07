@@ -77,24 +77,75 @@ $
 まず、$g^(i' j)$は$diff_i'$と可換である。
 $i'$が$r$に対応するとき、$|g|$の$r$に依存する部分以外は$diff_i'$と可換であるため、約分して、
 $
-(laplacian)_r f = 1 / r^(d-1) diff_r (r^(d-1) diff_r f)
+(laplacian)_r f = 1 / r^(d-1) diff_r (r^(d-1) diff_r f) = diff_r^2 f + (d-1) / r diff_r f
 $
 $i'$が$theta_i$に対応するとき、$|g|$の$theta_i$に依存する部分以外は$diff_i'$と可換であるため、約分して、
 $
-(laplacian)_theta_i f = 1 / ((r^2 product_(j=i+1)^(d-1) sin^2(theta_j)) sin^(i-1)(theta_i)) diff_(theta_i) (sin^(i-1)(theta_i) diff_(theta_i) f)
+(laplacian)_theta_i f = 1 / ((r^2 product_(j=i+1)^(d-1) sin^2(theta_j)) sin^(i-1)(theta_i)) diff_(theta_i) (sin^(i-1)(theta_i) diff_(theta_i) f) =  1 / (r^2 product_(j=i+1)^(d-1) sin^2(theta_j)) (diff_(theta_i)^2 f + (i-1) cot(theta_i) diff_(theta_i) f)
 $
 ]
 @BibEntry2021Nov
 #lemma()[
 $
-(laplacian_d)_theta_i / (sin^2 (theta_(d-1))) f = (laplacian_(d-1))_theta_i f
+forall i in {1, ..., d-2},(laplacian_d)_theta_i / (sin^2 (theta_(d-1))) f = (laplacian_(d-1))_theta_i f
 $
 ]
 
 == ラプラス方程式
 
-$d$次元ラプラス方程式$laplacian f = 0$の変数分離可能な解$f(r,theta_1, ..., theta_(d-1))=R(r)Z(theta_1, ..., theta_(d-1))$を考える。
+#let Rd = $R_d (r)$
+#let Zd = $Z_d (theta_1, ..., theta_(d-1))$
+#let Wd = $W_d (theta_(d-1))$
+#let Zd1 = $Z_(d - 1) (theta_1, ..., theta_(d-2))$
 
+$d$次元ラプラス方程式$laplacian f = 0$の変数分離可能な解$f(r,theta_1, ..., theta_(d-1))=Rd Zd$を考える。 代入して
+$
+Zd (laplacian)_r Rd + Rd sum_(i=1)^(d-1) (laplacian_d)_theta_i Zd = 0
+$
+$
+- ((laplacian)_r Rd) / Rd = (sum_(i=1)^(d-1) (laplacian_d)_theta_i Zd) / Zd =: k^2 = "const."
+$
+$
+cases(
+((laplacian)_r Rd) / Rd + k^2 = 0 ,
+(sum_(i=1)^(d-1) (laplacian_d)_theta_i Zd) / Zd - k^2 = 0
+)\
+cases(
+  diff_r^2 Rd + (d-1) / r diff_r Rd + k(k + d - 2) Rd = 0 &("ベッセルの微分方程式"),
+  sum_(i=1)^(d-1) (laplacian_d)_theta_i Zd - k(k + d - 2) Zd = 0 & ""
+)
+$
+$d=2$のとき、
+$
+diff^2_theta_1Z(theta_1) - k^2 Z(theta_1) = 0
+$
+$
+Z(theta_1) = A cos(k theta_1) + B sin(k theta_1)
+$
+@BibEntry2021Dec
+
+$d=d$のとき、$Zd = Wd Zd1$と変数分離可能な解を考える。
+$
+sum_(i=1)^(d-2) (laplacian_d)_theta_i Z_d + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
+$
+$
+sin^2 (theta_(d-1)) sum_(i=1)^(d-2) (laplacian_(d-1))_theta_i Zd1 Wd + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
+$
+$d=d-1$のときの式を代入して、
+$
+sin^2 (theta_(d-1)) l(l + d - 1) Zd1 Wd + (laplacian_d)_theta_(d-1) Zd - k(k + d - 2) Zd = 0
+$
+$
+sin^2 (theta_(d-1)) l(l + d - 1) Wd + (laplacian_d)_theta_(d-1) Wd - k(k + d - 2) Wd = 0
+$
+$
+(diff_(theta_i)^2 Wd + (d-1) cot(theta_i) diff_(theta_i) Wd)/r^2 - cos^2 (theta_(d-1))  k(k + d - 2) Wd = 0
+$
+
+$t := cos (theta_(d-1))$とおけば、
+$
+(diff_(theta_i)^2 + (i-1)
+$
 #bibliography("math.bib")
 
 // 以下のような基底を考える。
