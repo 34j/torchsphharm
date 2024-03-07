@@ -85,6 +85,11 @@ $
 $
 ]
 @BibEntry2021Nov
+#lemma()[
+$
+(laplacian_d)_theta_i / (sin^2 (theta_(d-1))) f = (laplacian_(d-1))_theta_i f
+$
+]
 
 == ラプラス方程式
 
