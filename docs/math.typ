@@ -7,7 +7,9 @@
 #let definition = thmbox("definition", "Definition", stroke: rgb("#444444") + 1pt)
 #let theorem = thmbox("theorem", "Theorem", stroke: rgb("#444444") + 1pt)
 #let lemma = thmbox("lemma", "Lemma", stroke: rgb("#444444") + 1pt)
+#let corollary = thmbox("corollary", "Corollary", stroke: rgb("#444444") + 1pt)
 #let proof = thmproof("proof", "Proof")
+
 = 球面調和関数
 
 == 極座標における計量テンソル
@@ -18,30 +20,43 @@ $forall d in NN, RR^d$における以下のような極座標$(r, theta_1, ..., 
 $
 cases(
 0 < r,
-0 <= theta_i < pi &"for" 1 <= i <= d-2,
-0 <= theta_(d-1) < 2 pi
+0 <= theta_1 < 2 pi,
+0 <= theta_i < pi &"for" 2 <= i <= d-1,
 )
 $
 
 $
 x_i =  cases(
   r cos phi &"if" i = 1 ,
-  r product_(j=1)^(i-1) sin(theta_j) cos phi &"if" 2 <= i <= d-1 ,
+  r product_(j=d-i)^(d-1) sin(theta_j) cos phi &"if" 2 <= i <= d-1 ,
   r product_(j=1)^(d-1) sin(theta_j) &"if" i = d )
 $
 ]
+
+参考文献と異なり、$theta_i$をこのような順番で取らないと、球面調和関数の計算で添字をずらすことなり、混乱する。$x_i$の順序はどうでも良い。
+
 #lemma()[
 $
-g_(i j) = diag(1, r^2, r^2 sin^2(theta_1), ..., r^2 product_(j=1)^(d-2) sin^2(theta_j))_(i j)
+g_(i j) = diag(1, r^2 product_(j=2)^(d-1) sin^2(theta_j), ..., r^2)_(i j)
 $
 ]
 #proof()[
 $
-(d s)^2 = (d r)^2 + r^2 sum_(i=1)^(d-1) ((product_(j=1)^(i-1) sin^2(theta_j)) (d theta_i)^2)
+(d s)^2 = (d r)^2 + r^2 sum_(i=1)^(d-1) ((product_(j=i+1)^(d-1) sin^2(theta_j)) (d theta_i)^2)
 $
 ]
 @BibEntry2012Jun
 
+#corollary()[
+$
+g^(i j) = diag(1, 1/(r^2 product_(j=2)^(d-1) sin^2(theta_j)), ..., 1/r^2)_(i j)
+$
+]
+#corollary()[
+$
+sqrt(|g|) = r^(d-1) product_(i=2)^(d-1) sin^(i-1) (theta_i)
+$
+]
 == 極座標ラプラシアン
 #theorem([Voss-Weylの定理 @BibEntry2024Feb])[
 $
@@ -50,29 +65,23 @@ $
 ]
 #theorem([$laplacian$の極座標表示])[
 $
-laplacian f = 1 / r^(d-1) diff_r (r^(d-1) diff_r f) + sum_(i=1)^(d-1) 1 / ((r^2 product_(j=1)^(i-1) sin^2(theta_j)) sin^(d-i-1)(theta_i)) diff_(theta_i) (sin^(d-i-1)(theta_i) diff_(theta_i) f)
+laplacian f = 1 / r^(d-1) diff_r (r^(d-1) diff_r f) + sum_(i=1)^(d-1) 1 / ((r^2 product_(j=i+1)^(d-1) sin^2(theta_j)) sin^(i-1)(theta_i)) diff_(theta_i) (sin^(i-1)(theta_i) diff_(theta_i) f)
 $
 ]
 #proof[
-$
-g^(i j) = diag(1, 1/r^2, 1/(r^2 sin^2(theta_1)), ..., 1/(r^2 product_(j=1)^(d-2) sin^2(theta_j)))_(i j)
-$
-$
-sqrt(|g|) = r^(d-1) product_(i=1)^(d-1) sin^(d-i-1)(theta_i)
-$
 
-各$i$ごとに分割する。
+各$i'$ごとに分割する。
 $
 laplacian f = (laplacian)_r f + sum_(i=1)^(d-1) (laplacian)_(theta_i) f
 $
-まず、$g^(i j)$は$diff_i$と可換である。
-$i$が$r$に対応するとき、$|g|$の$r$に依存する部分以外は$diff_i$と可換であるため、約分して、
+まず、$g^(i' j)$は$diff_i'$と可換である。
+$i'$が$r$に対応するとき、$|g|$の$r$に依存する部分以外は$diff_i'$と可換であるため、約分して、
 $
 (laplacian)_r f = 1 / r^(d-1) diff_r (r^(d-1) diff_r f)
 $
-$i$が$theta_j$に対応するとき、$|g|$の$theta_j$に依存する部分以外は$diff_i$と可換であるため、約分して、
+$i'$が$theta_i$に対応するとき、$|g|$の$theta_i$に依存する部分以外は$diff_i'$と可換であるため、約分して、
 $
-(laplacian)_theta_j f = 1 / ((r^2 product_(k=1)^(j-1) sin^2(theta_k)) sin^(d-j-1)(theta_j)) diff_(theta_j) (sin^(d-j-1)(theta_j) diff_(theta_j) f)
+(laplacian)_theta_i f = 1 / ((r^2 product_(j=i+1)^(d-1) sin^2(theta_j)) sin^(i-1)(theta_i)) diff_(theta_i) (sin^(i-1)(theta_i) diff_(theta_i) f)
 $
 ]
 @BibEntry2021Nov
