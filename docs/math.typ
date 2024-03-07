@@ -10,7 +10,7 @@
 #let corollary = thmbox("corollary", "Corollary", stroke: rgb("#444444") + 1pt)
 #let proof = thmproof("proof", "Proof")
 
-= 球面調和関数
+= 超球面調和関数(hyperspherical harmonics functions)
 
 == 極座標における計量テンソル
 
@@ -146,6 +146,15 @@ $t := cos (theta_(d-1))$とおけば、$diff_theta_(d-1) = - sin (theta_(d-1)) d
 $
 ((1 - t^2) diff_t^2 - (d-1)t diff_t - l(l + d - 1) / (1 - t^2) + k(k + d - 2) ) W = 0
 $
+#definition([Gegenbauer陪多項式])[
+$
+C^(lambda, k)_h (t):= (1 - t^2)^(k/2) dv(C^(lambda)_h (t),t,k)
+$
+]
+
+== 正規化
+
+== 対称性による計算量の削減
 #bibliography("math.bib")
 
 // 以下のような基底を考える。
